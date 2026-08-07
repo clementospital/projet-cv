@@ -2,3 +2,6 @@
 __pycache__/
 *.pyc
 .env
+
+dist/*
+!dist/cv.pdf
