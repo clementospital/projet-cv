@@ -50,12 +50,12 @@ identite:
   localisation: "Toulouse, France"
 
 accroche: >
-  En tant qu'étudiant en informatique et réseaux passionné par le développement
-  logiciel, la cybersécurité et l'intelligence artificielle, je recherche un stage
-  du mois de Juin au mois de Septembre 2026, afin d'acquérir de l'expérience dans
-  ces domaines. Je souhaite mettre à profit, améliorer mes compétences en
-  programmation, et contribuer efficacement à vos projets tout en développant
-  davantage mon expertise technique.
+  Étudiant en dernière année du Master Génie Informatique et Réseaux à l'INSA
+  Toulouse, passionné par le développement logiciel, la cybersécurité et
+  l'intelligence artificielle, je recherche un poste à temps plein dans ces
+  domaines à l'issue de mon stage chez Capgemini. Je souhaite mettre à profit
+  et approfondir mes compétences en programmation, et contribuer efficacement
+  aux projets de mon futur employeur.
 
 experiences:
   - poste: "Stagiaire"
