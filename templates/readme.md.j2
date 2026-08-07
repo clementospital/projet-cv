@@ -1,0 +1,64 @@
+# {{ identite.nom }}
+
+{% if identite.titre %}{{ identite.titre }}{% endif %}
+
+{{ identite.email }}{% if identite.telephone %} · {{ identite.telephone }}{% endif %}{% if identite.localisation %} · {{ identite.localisation }}{% endif %}
+
+{% if accroche %}
+## Profil
+
+{{ accroche }}
+{% endif %}
+{% if experiences %}
+## Expérience professionnelle
+{% for exp in experiences %}
+### {{ exp.poste }} — {{ exp.entreprise }}{% if exp.lieu %}, {{ exp.lieu }}{% endif %}
+*{{ exp.date_debut_affichage }} – {{ exp.date_fin_affichage }}*
+{% if exp.points %}
+{% for point in exp.points %}
+- {{ point }}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if formations %}
+## Formation
+{% for form in formations %}
+### {{ form.diplome }} — {{ form.etablissement }}{% if form.lieu %}, {{ form.lieu }}{% endif %}
+*{{ form.date_debut_affichage }} – {{ form.date_fin_affichage }}*
+{% endfor %}
+{% endif %}
+{% if competences %}
+## Compétences
+{% for groupe in competences %}
+- **{{ groupe.categorie }}** : {{ groupe['items'] | join(", ") }}
+{% endfor %}
+{% endif %}
+{% if projets %}
+## Projets
+{% for projet in projets %}
+### {% if projet.url %}[{{ projet.nom }}]({{ projet.url }}){% else %}{{ projet.nom }}{% endif %}
+{% if projet.description %}
+{{ projet.description }}
+{% endif %}
+{% if projet.technos %}
+{{ projet.technos | join(", ") }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if langues %}
+## Langues
+{% for l in langues %}
+- {{ l.langue }} — {{ l.niveau }}
+{% endfor %}
+{% endif %}
+{% if centres_interet %}
+## Centres d'intérêt
+{% for groupe in centres_interet %}
+- **{{ groupe.categorie }}** : {{ groupe['items'] | join(", ") }}
+{% endfor %}
+{% endif %}
+
+---
+
+*CV généré automatiquement depuis [`cv.yaml`](cv.yaml) via `python src/build.py`. Version PDF : [`dist/cv.pdf`](dist/cv.pdf). Version web : [Pages du projet](../../).*

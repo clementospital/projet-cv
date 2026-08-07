@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>{{ identite.nom }} — CV</title>
+  <style>{{ print_css }}</style>
+</head>
+<body>
+  <header>
+    <h1>{{ identite.nom }}</h1>
+    {% if identite.titre %}<p class="titre">{{ identite.titre }}</p>{% endif %}
+    <p class="contact">
+      {{ identite.email }}{% if identite.telephone %} · {{ identite.telephone }}{% endif %}{% if identite.localisation %} · {{ identite.localisation }}{% endif %}
+    </p>
+  </header>
+
+  {% if accroche %}
+  <section>
+    <h2>Profil</h2>
+    <p>{{ accroche }}</p>
+  </section>
+  {% endif %}
+
+  {% if experiences %}
+  <section>
+    <h2>Expérience professionnelle</h2>
+    {% for exp in experiences %}
+    <article class="entree">
+      <div class="entree-entete">
+        <h3>{{ exp.poste }} — {{ exp.entreprise }}{% if exp.lieu %}, {{ exp.lieu }}{% endif %}</h3>
+        <span class="periode">{{ exp.date_debut_affichage }} – {{ exp.date_fin_affichage }}</span>
+      </div>
+      {% if exp.points %}
+      <ul>
+        {% for point in exp.points %}<li>{{ point }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if formations %}
+  <section>
+    <h2>Formation</h2>
+    {% for form in formations %}
+    <article class="entree">
+      <div class="entree-entete">
+        <h3>{{ form.diplome }} — {{ form.etablissement }}{% if form.lieu %}, {{ form.lieu }}{% endif %}</h3>
+        <span class="periode">{{ form.date_debut_affichage }} – {{ form.date_fin_affichage }}</span>
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if competences %}
+  <section>
+    <h2>Compétences</h2>
+    {% for groupe in competences %}
+    <p class="groupe"><strong>{{ groupe.categorie }} :</strong> {{ groupe['items'] | join(", ") }}</p>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if projets %}
+  <section>
+    <h2>Projets</h2>
+    {% for projet in projets %}
+    <article class="entree">
+      <h3>{{ projet.nom }}{% if projet.url %} — {{ projet.url }}{% endif %}</h3>
+      {% if projet.description %}<p>{{ projet.description }}</p>{% endif %}
+      {% if projet.technos %}<p class="groupe">{{ projet.technos | join(", ") }}</p>{% endif %}
+    </article>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if langues %}
+  <section>
+    <h2>Langues</h2>
+    <p>{% for l in langues %}{{ l.langue }} ({{ l.niveau }}){% if not loop.last %} · {% endif %}{% endfor %}</p>
+  </section>
+  {% endif %}
+
+  {% if centres_interet %}
+  <section>
+    <h2>Centres d'intérêt</h2>
+    {% for groupe in centres_interet %}
+    <p class="groupe"><strong>{{ groupe.categorie }} :</strong> {{ groupe['items'] | join(", ") }}</p>
+    {% endfor %}
+  </section>
+  {% endif %}
+</body>
+</html>

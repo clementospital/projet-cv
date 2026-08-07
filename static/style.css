@@ -1,0 +1,153 @@
+:root {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --fg-muted: #5a5a5a;
+  --accent: #1d4ed8;
+  --border: #dcdcdc;
+  --chip-bg: #f0f0f2;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14151a;
+    --fg: #e8e8ea;
+    --fg-muted: #a6a6ad;
+    --accent: #7aa2f7;
+    --border: #33343d;
+    --chip-bg: #1f2027;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 2.5rem 1.25rem 4rem;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+main,
+header.entete {
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+a {
+  color: var(--accent);
+}
+
+.entete h1 {
+  margin: 0 0 0.15em;
+  font-size: 2rem;
+}
+
+.entete .titre {
+  margin: 0 0 0.75em;
+  color: var(--fg-muted);
+  font-size: 1.1rem;
+}
+
+.entete .contact {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em 1em;
+  margin: 0 0 2rem;
+  padding: 0;
+  font-size: 0.95rem;
+  color: var(--fg-muted);
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+section.accroche p {
+  font-size: 1.05rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.35em;
+  margin-bottom: 1em;
+}
+
+.entree {
+  margin-bottom: 1.25rem;
+}
+
+.entree-entete {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.25em 1em;
+}
+
+.entree-entete h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.entree .periode {
+  color: var(--fg-muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.entree .lieu {
+  margin: 0.15em 0 0.4em;
+  color: var(--fg-muted);
+  font-size: 0.9rem;
+}
+
+.entree ul {
+  margin: 0.5em 0 0;
+  padding-left: 1.2em;
+}
+
+.groupe {
+  margin-bottom: 0.9rem;
+}
+
+.groupe h3 {
+  margin: 0 0 0.4em;
+  font-size: 0.95rem;
+  color: var(--fg-muted);
+  font-weight: 600;
+}
+
+.liste-puces {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin: 0;
+  padding: 0;
+}
+
+.liste-puces li {
+  background: var(--chip-bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.25em 0.8em;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .entete h1 {
+    font-size: 1.6rem;
+  }
+}

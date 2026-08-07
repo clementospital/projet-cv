@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ identite.nom }} — CV</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="entete">
+    <h1>{{ identite.nom }}</h1>
+    {% if identite.titre %}<p class="titre">{{ identite.titre }}</p>{% endif %}
+    <ul class="contact">
+      <li><a href="mailto:{{ identite.email }}">{{ identite.email }}</a></li>
+      {% if identite.telephone %}
+      <li><a href="tel:{{ identite.telephone | replace(' ', '') }}">{{ identite.telephone }}</a></li>
+      {% endif %}
+      {% if identite.localisation %}<li>{{ identite.localisation }}</li>{% endif %}
+    </ul>
+  </header>
+
+  <main>
+    {% if accroche %}
+    <section class="accroche">
+      <p>{{ accroche }}</p>
+    </section>
+    {% endif %}
+
+    {% if experiences %}
+    <section>
+      <h2>Expérience professionnelle</h2>
+      {% for exp in experiences %}
+      <article class="entree">
+        <div class="entree-entete">
+          <h3>{{ exp.poste }} — {{ exp.entreprise }}</h3>
+          <span class="periode">{{ exp.date_debut_affichage }} – {{ exp.date_fin_affichage }}</span>
+        </div>
+        {% if exp.lieu %}<p class="lieu">{{ exp.lieu }}</p>{% endif %}
+        {% if exp.points %}
+        <ul>
+          {% for point in exp.points %}<li>{{ point }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if formations %}
+    <section>
+      <h2>Formation</h2>
+      {% for form in formations %}
+      <article class="entree">
+        <div class="entree-entete">
+          <h3>{{ form.diplome }} — {{ form.etablissement }}</h3>
+          <span class="periode">{{ form.date_debut_affichage }} – {{ form.date_fin_affichage }}</span>
+        </div>
+        {% if form.lieu %}<p class="lieu">{{ form.lieu }}</p>{% endif %}
+      </article>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if competences %}
+    <section>
+      <h2>Compétences</h2>
+      {% for groupe in competences %}
+      <div class="groupe">
+        <h3>{{ groupe.categorie }}</h3>
+        <ul class="liste-puces">
+          {% for item in groupe['items'] %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if projets %}
+    <section>
+      <h2>Projets</h2>
+      {% for projet in projets %}
+      <article class="entree">
+        <h3>
+          {% if projet.url %}<a href="{{ projet.url }}">{{ projet.nom }}</a>{% else %}{{ projet.nom }}{% endif %}
+        </h3>
+        {% if projet.description %}<p>{{ projet.description }}</p>{% endif %}
+        {% if projet.technos %}
+        <ul class="liste-puces">
+          {% for t in projet.technos %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if langues %}
+    <section>
+      <h2>Langues</h2>
+      <ul class="liste-puces">
+        {% for l in langues %}<li>{{ l.langue }} — {{ l.niveau }}</li>{% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if centres_interet %}
+    <section>
+      <h2>Centres d'intérêt</h2>
+      {% for groupe in centres_interet %}
+      <div class="groupe">
+        <h3>{{ groupe.categorie }}</h3>
+        <ul class="liste-puces">
+          {% for item in groupe['items'] %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+  </main>
+</body>
+</html>

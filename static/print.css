@@ -1,0 +1,92 @@
+@page {
+  size: A4;
+  margin: 14mm 16mm;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10.3pt;
+  line-height: 1.35;
+  color: #000000;
+}
+
+header {
+  margin-bottom: 10pt;
+}
+
+header h1 {
+  margin: 0 0 2pt;
+  font-size: 20pt;
+}
+
+header .titre {
+  margin: 0 0 4pt;
+  font-size: 11pt;
+  color: #333333;
+}
+
+header .contact {
+  margin: 0;
+  font-size: 9.5pt;
+  color: #333333;
+}
+
+section {
+  margin-bottom: 9pt;
+}
+
+h2 {
+  font-size: 11pt;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-bottom: 0.75pt solid #000000;
+  padding-bottom: 2pt;
+  margin: 0 0 6pt;
+}
+
+/* Empêche qu'une expérience/formation soit coupée au milieu par un saut de page. */
+.entree {
+  margin-bottom: 7pt;
+  page-break-inside: avoid;
+}
+
+.entree-entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8pt;
+}
+
+.entree-entete h3 {
+  margin: 0;
+  font-size: 10.3pt;
+  font-weight: bold;
+}
+
+.periode {
+  font-size: 9.3pt;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.entree ul {
+  margin: 3pt 0 0;
+  padding-left: 13pt;
+}
+
+.entree li {
+  margin-bottom: 1pt;
+}
+
+.groupe {
+  margin: 0 0 3pt;
+}
+
+p {
+  margin: 0 0 4pt;
+}
