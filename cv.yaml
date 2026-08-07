@@ -1,0 +1,83 @@
+# Source unique de vérité pour le CV.
+# Les dates sont toujours au format YYYY-MM et formatées à l'affichage par src/build.py.
+# date_fin: null signifie "en cours" (poste ou formation sans fin connue).
+
+identite:
+  nom: "Clément Ospital"
+  titre: "Étudiant en Génie Informatique et Réseaux"
+  email: "clement.ospital64@gmail.com"
+  telephone: "+33 07 83 62 68 63"
+  localisation: "Toulouse, France"
+
+accroche: >
+  Étudiant en dernière année du Master Génie Informatique et Réseaux à l'INSA
+  Toulouse, passionné par le développement logiciel, la cybersécurité et
+  l'intelligence artificielle, je recherche un poste à temps plein dans ces
+  domaines à l'issue de mon stage chez Capgemini. Je souhaite mettre à profit
+  et approfondir mes compétences en programmation, et contribuer efficacement
+  aux projets de mon futur employeur.
+
+experiences:
+  - poste: "Stagiaire"
+    entreprise: "Capgemini Toulouse"
+    lieu: "Toulouse"
+    date_debut: "2026-06"
+    date_fin: "2026-09"
+    points:
+      - "Secteur GNSS : création d'un logiciel d'automatisation des retours clients utilisant une IA pour aider les équipes à traiter les demandes plus vite."
+  - poste: "Équipier"
+    entreprise: "McDonald's"
+    lieu: "Benejacq"
+    date_debut: "2024-06"
+    date_fin: "2024-08"
+    points:
+      - "Travail au comptoir, en contact avec les clients, adaptation aux demandes."
+      - "Apprentissage du métier en situation réelle, intégration rapide à l'équipe."
+  - poste: "Tourneur-Fraiseur"
+    entreprise: "Nexteam"
+    lieu: "Narcastet"
+    date_debut: "2023-07"
+    date_fin: "2023-08"
+    points:
+      - "Découverte du métier au sein d'une équipe de travailleurs, sous supervision."
+      - "Expérience du travail à la chaîne, exigeant une bonne cohésion d'équipe."
+
+formations:
+  - diplome: "Master en Génie Informatique et Réseaux"
+    etablissement: "INSA Toulouse"
+    lieu: "Toulouse"
+    date_debut: "2022-09"
+    date_fin: "2027-06"
+  - diplome: "Échange Erasmus — Département Informatique"
+    etablissement: "Oslo Metropolitan University"
+    lieu: "Oslo, Norvège"
+    date_debut: "2025-01"
+    date_fin: "2025-06"
+  - diplome: "Baccalauréat, mention Très Bien (spé. Mathématiques et NSI)"
+    etablissement: "Lycée Paul Rey"
+    lieu: "Nay"
+    date_debut: "2019-09"
+    date_fin: "2022-06"
+
+competences:
+  - categorie: "Langages de programmation"
+    items: ["Python", "Ada", "HTML", "C", "CSS", "Bash", "OCaml", "Java", "JavaScript"]
+  - categorie: "Savoir-être"
+    items:
+      - "Esprit d'initiative et capacité à apprendre rapidement de nouvelles technologies"
+      - "Solides compétences en résolution de problèmes et optimisation d'algorithmes"
+      - "Esprit d'équipe et capacité à communiquer des concepts techniques à des publics variés"
+
+projets: []
+
+langues:
+  - langue: "Français"
+    niveau: "Langue maternelle"
+  - langue: "Anglais"
+    niveau: "C1 (TOEIC 955)"
+
+centres_interet:
+  - categorie: "Sports"
+    items: ["Football", "Badminton", "Randonnée", "Ski"]
+  - categorie: "Autres"
+    items: ["Voyages et découverte de nouvelles cultures", "Programmation et jeux vidéo"]
