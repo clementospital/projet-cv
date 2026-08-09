@@ -8,7 +8,7 @@ identite:
   email: "clement.ospital64@gmail.com"
   telephone: "+33 07 83 62 68 63"
   localisation: "Toulouse, France"
-  github: "https://github.com/clemcloummm"
+  github: "https://github.com/clementospital"
 
 accroche: >
   Étudiant en dernière année du Master Génie Informatique et Réseaux à l'INSA
@@ -69,7 +69,166 @@ competences:
       - "Solides compétences en résolution de problèmes et optimisation d'algorithmes"
       - "Esprit d'équipe et capacité à communiquer des concepts techniques à des publics variés"
 
-projets: []
+projets:
+  - slug: "ocaml-project"
+    nom: "Ocaml-Project — flot maximum (Ford-Fulkerson)"
+    resume: >
+      Implémentation en OCaml de l'algorithme de Ford-Fulkerson (flot
+      maximum), avec export et visualisation du graphe résultat.
+    description: >
+      Implémentation en OCaml de l'algorithme de Ford-Fulkerson pour le calcul
+      du flot maximum dans un graphe orienté valué. Le projet part d'un
+      squelette de cours (structure de graphe fournie, abstraite via une
+      signature .mli) et y ajoute la résolution complète : recherche de
+      chemin augmentant par parcours en profondeur, calcul de la capacité
+      résiduelle minimale sur ce chemin, mise à jour du graphe résiduel,
+      jusqu'à épuisement des chemins augmentants. Le résultat est exportable
+      au format DOT et visualisable en SVG via Graphviz.
+    contexte: "Projet en binôme, cours de programmation fonctionnelle (INSA Toulouse)"
+    contribution: >
+      Implémentation de l'algorithme (recherche de chemin augmentant, mise à
+      jour du graphe résiduel), des fonctions utilitaires sur les graphes, et
+      des tests unitaires — 13 des 14 commits du dépôt.
+    technos: ["OCaml", "Dune", "Graphviz"]
+    url: "https://github.com/clementospital/Ocaml-Project"
+    lancement:
+      - "make build"
+      - "./ftest.exe your_graph.txt your_source your_sink your_output.txt"
+      - "dot -Tsvg your_output.txt > demo.svg"
+    extraits:
+      - fichier: "src/ford_fulk.ml"
+        langage: "ocaml"
+        code: |
+          let find_path gr src dest =
+            let rec dfs node path =
+              if node = dest then List.rev path
+              else
+                let voisins_arcs = out_arcs gr node in
+                let arcs_utilisables = List.filter (fun arc -> arc.lbl > 0) voisins_arcs in
+                let voisins = List.map (fun x -> x.tgt) arcs_utilisables in
+                let voisinsNotVisited = List.filter (fun x -> not (List.mem x path)) voisins in
+                iterVoisins voisinsNotVisited path
+
+            and iterVoisins vnv path =
+              match vnv with
+              | [] -> []
+              | x :: rest ->
+                let res = dfs x (x :: path) in
+                if res = [] then iterVoisins rest path else res
+            in
+            dfs src [src]
+
+          let algo_ford gr src dest =
+            let rec aux acu =
+              let nodePath = find_path acu src dest in
+              match nodePath with
+                | [] -> acu
+                | path ->
+                  let arcPath = find_arc_path acu path in
+                  let minCapa = find_min_capacity arcPath in
+                  aux (add_flow acu arcPath minCapa)
+            in
+            aux gr
+      - fichier: "src/tools.ml"
+        langage: "ocaml"
+        code: |
+          open Graph
+
+          let clone_nodes gr = n_fold gr new_node empty_graph
+
+          let gmap gr f = e_fold gr (fun acu x -> new_arc acu ({src = x.src ; tgt = x.tgt ; lbl = f x.lbl})) (clone_nodes gr)
+
+          let add_arc gr id1 id2 (n : int) =
+              let arc = find_arc gr id1 id2 in
+              match arc with
+                |None -> new_arc gr {src = id1 ; tgt = id2 ; lbl = n};
+                |Some x-> new_arc gr {x with lbl = x.lbl + n};
+    apprentissage: null
+    points_forts: []
+    points_amelioration: []
+
+  - slug: "detecteur-images-ia"
+    nom: "Détecteur d'images générées par IA"
+    resume: >
+      Détecteur d'images générées par IA (ResNet18 + analyse fréquentielle
+      FFT) ; conception et développement de l'interface Gradio.
+    description: >
+      Projet de recherche encadrée (PIR) autour de la détection d'images
+      générées par IA. Le modèle combine deux branches de réseau de neurones
+      fusionnées avant classification : une branche spatiale (ResNet18) qui
+      traite l'image RGB, et une branche fréquentielle (petit CNN) qui traite
+      le spectre de magnitude obtenu par FFT 2D de l'image en niveaux de gris.
+    contexte: "Projet de recherche encadrée (PIR), 4e année INSA Toulouse, filière IA — travail en équipe"
+    contribution: >
+      Conception et développement de l'interface Gradio du projet : chargement
+      d'une image, appel du modèle, affichage de la prédiction et du taux de
+      confiance, avec un thème visuel sombre personnalisé.
+    technos: ["Python", "PyTorch", "Gradio", "NumPy"]
+    url: "https://github.com/vivienbn/pir_4a_ia"
+    lancement:
+      - "pip install torch torchvision gradio pillow numpy"
+      - "python interface.py"
+    extraits:
+      - fichier: "interface.py"
+        langage: "python"
+        code: |
+          class FreqBranch(nn.Module):
+              def __init__(self):
+                  super().__init__()
+                  self.net = nn.Sequential(
+                      nn.Conv2d(1, 32, kernel_size=3, padding=1),
+                      nn.BatchNorm2d(32), nn.ReLU(), nn.MaxPool2d(2),
+
+                      nn.Conv2d(32, 64, kernel_size=3, padding=1),
+                      nn.BatchNorm2d(64), nn.ReLU(), nn.MaxPool2d(2),
+
+                      nn.Conv2d(64, 128, kernel_size=3, padding=1),
+                      nn.BatchNorm2d(128), nn.ReLU(),
+                      nn.AdaptiveAvgPool2d((1, 1)),
+                      nn.Flatten(),
+                  )
+
+              def forward(self, x):
+                  return self.net(x)
+
+
+          class FusionModel(nn.Module):
+              def __init__(self):
+                  super().__init__()
+                  resnet = models.resnet18(weights=None)
+                  self.branch_spatial = nn.Sequential(*list(resnet.children())[:-1], nn.Flatten())
+                  self.branch_freq    = FreqBranch()
+                  self.classifier     = nn.Sequential(
+                      nn.Linear(512 + 128, 256),
+                      nn.ReLU(),
+                      nn.Dropout(0.5),
+                      nn.Linear(256, 2),
+                  )
+
+              def forward(self, x_spatial, x_freq):
+                  feat_s = self.branch_spatial(x_spatial)         # [B, 512]
+                  feat_f = self.branch_freq(x_freq)               # [B, 128]
+                  return self.classifier(torch.cat([feat_s, feat_f], dim=1))
+      - fichier: "interface.py"
+        langage: "python"
+        code: |
+          def compute_freq_tensor(image_pil: Image.Image) -> torch.Tensor:
+              """
+              Reproduit la représentation fréquentielle utilisée à l'entraînement.
+              On calcule la magnitude log du spectre FFT 2D de l'image en niveaux de gris.
+              """
+              gray = image_pil.convert("L").resize((IMAGE_SIZE, IMAGE_SIZE))
+              arr  = np.array(gray, dtype=np.float32)
+
+              fshift = np.fft.fftshift(np.fft.fft2(arr))
+              mag    = np.log(np.abs(fshift) + 1).astype(np.float32)   # [H, W]
+
+              tensor = torch.from_numpy(mag).unsqueeze(0)               # [1, H, W]
+              tensor = transforms.Normalize(mean=[MEAN_FREQ], std=[STD_FREQ])(tensor)
+              return tensor
+    apprentissage: null
+    points_forts: []
+    points_amelioration: []
 
 langues:
   - langue: "Français"
