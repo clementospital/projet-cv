@@ -1,0 +1,60 @@
+{% extends "base.html.j2" %}
+{% block titre %}Compétences{% endblock %}
+{% block contenu %}
+<section class="page-intro reveal">
+  <p class="eyebrow">$ cat competences.json</p>
+  <h1>Compétences</h1>
+</section>
+
+{% if competences %}
+<section class="reveal window">
+  <div class="window-bar">
+    <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+    <span class="window-title">skills.json</span>
+  </div>
+  <div class="window-body">
+    {% for groupe in competences %}
+    <div class="groupe">
+      <h3>{{ groupe.categorie }}</h3>
+      <ul class="chips">
+        {% for item in groupe['items'] %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if langues %}
+<section class="reveal window">
+  <div class="window-bar">
+    <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+    <span class="window-title">langues.txt</span>
+  </div>
+  <div class="window-body">
+    <ul class="chips">
+      {% for l in langues %}<li>{{ l.langue }} — {{ l.niveau }}</li>{% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if centres_interet %}
+<section class="reveal window">
+  <div class="window-bar">
+    <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+    <span class="window-title">centres_interet.md</span>
+  </div>
+  <div class="window-body">
+    {% for groupe in centres_interet %}
+    <div class="groupe">
+      <h3>{{ groupe.categorie }}</h3>
+      <ul class="chips">
+        {% for item in groupe['items'] %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

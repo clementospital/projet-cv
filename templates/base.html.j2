@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <script>
+    // Applique le thème stocké avant le premier rendu, pour éviter un flash sombre/clair.
+    (function () {
+      if (localStorage.getItem("theme") === "light") {
+        document.documentElement.dataset.theme = "light";
+      }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titre %}{{ identite.nom }}{% endblock %} — {{ identite.nom }}</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="brand">~/clement-ospital $</a>
+
+      <nav class="nav" id="nav">
+        {% for p in pages %}
+        <a href="{{ p.fichier }}" class="nav-link{% if p.id == page_actuelle %} nav-link-actif{% endif %}">{{ p.libelle }}</a>
+        {% endfor %}
+        <a href="cv.pdf" download class="nav-link nav-link-pdf">Télécharger le CV</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-ghost" href="cv.pdf" download>Télécharger le CV</a>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Changer de thème">🌓</button>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenu">
+    {% block contenu %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p class="footer-contact">
+        <button type="button" class="copy-email" id="copy-email" data-email="{{ identite.email }}">{{ identite.email }}</button>
+        {% if identite.telephone %}<span>· {{ identite.telephone }}</span>{% endif %}
+        {% if identite.localisation %}<span>· {{ identite.localisation }}</span>{% endif %}
+      </p>
+      {% if identite.github %}
+      <p class="footer-links"><a href="{{ identite.github }}">{{ identite.github }}</a></p>
+      {% endif %}
+      <p class="footer-copy">$ echo "© {{ annee }} {{ identite.nom }}"</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

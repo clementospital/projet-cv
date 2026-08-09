@@ -1,0 +1,31 @@
+{% extends "base.html.j2" %}
+{% block titre %}Accueil{% endblock %}
+{% block contenu %}
+<section class="hero reveal">
+  <p class="eyebrow">$ whoami</p>
+  <h1>{{ identite.nom }}</h1>
+  <p class="hero-role">{{ identite.titre }}<span class="cursor" aria-hidden="true"></span></p>
+  <p class="hero-pitch">{{ accroche }}</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="parcours.html">Voir mon parcours →</a>
+    <a class="btn btn-ghost" href="cv.pdf" download>Télécharger le CV</a>
+  </div>
+</section>
+
+{% for groupe in competences %}
+{% if groupe.categorie == "Langages de programmation" %}
+<section class="reveal window" aria-label="Aperçu des langages">
+  <div class="window-bar">
+    <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+    <span class="window-title">stack.sh</span>
+  </div>
+  <div class="window-body">
+    <p class="prompt-line"><span class="prompt">$</span> tech --list</p>
+    <ul class="chips">
+      {% for item in groupe['items'] %}<li>{{ item }}</li>{% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+{% endfor %}
+{% endblock %}

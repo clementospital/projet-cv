@@ -1,0 +1,23 @@
+{% extends "base.html.j2" %}
+{% block titre %}Projets{% endblock %}
+{% block contenu %}
+<section class="page-intro reveal">
+  <p class="eyebrow">$ cd projets</p>
+  <h1>Projets</h1>
+</section>
+
+<section class="reveal window">
+  <div class="window-bar">
+    <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+    <span class="window-title">projets/README.md</span>
+  </div>
+  <div class="window-body">
+    <p class="prompt-line"><span class="prompt">$</span> ls projets/</p>
+    <p class="terminal-output">ls: impossible d'accéder à 'projets/' : en construction<span class="cursor" aria-hidden="true"></span></p>
+    <p class="hero-pitch">Cette page arrive bientôt. En attendant, jette un œil à mes dépôts :</p>
+    {% if identite.github %}
+    <a class="btn btn-primary" href="{{ identite.github }}">Voir mon GitHub →</a>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

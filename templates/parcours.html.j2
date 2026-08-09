@@ -1,0 +1,62 @@
+{% extends "base.html.j2" %}
+{% block titre %}Parcours{% endblock %}
+{% block contenu %}
+<section class="page-intro reveal">
+  <p class="eyebrow">$ cat parcours.log</p>
+  <h1>Parcours</h1>
+</section>
+
+{% if experiences %}
+<section class="reveal">
+  <h2>Expérience professionnelle</h2>
+  <div class="timeline">
+    {% for exp in experiences %}
+    <article class="timeline-item reveal">
+      <div class="window">
+        <div class="window-bar">
+          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          <span class="window-title">{{ exp.entreprise }}</span>
+        </div>
+        <div class="window-body">
+          <div class="entree-entete">
+            <h3>{{ exp.poste }}{% if exp.lieu %} · {{ exp.lieu }}{% endif %}</h3>
+            <span class="periode">{{ exp.date_debut_affichage }} – {{ exp.date_fin_affichage }}</span>
+          </div>
+          {% if exp.points %}
+          <ul>
+            {% for point in exp.points %}<li>{{ point }}</li>{% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if formations %}
+<section class="reveal">
+  <h2>Formation</h2>
+  <div class="timeline">
+    {% for form in formations %}
+    <article class="timeline-item reveal">
+      <div class="window">
+        <div class="window-bar">
+          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          <span class="window-title">{{ form.etablissement }}</span>
+        </div>
+        <div class="window-body">
+          <div class="entree-entete">
+            <h3>{{ form.diplome }}</h3>
+            <span class="periode">{{ form.date_debut_affichage }} – {{ form.date_fin_affichage }}</span>
+          </div>
+          {% if form.lieu %}<p class="lieu">{{ form.lieu }}</p>{% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}
