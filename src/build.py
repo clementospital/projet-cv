@@ -7,6 +7,7 @@ import copy
 import re
 import shutil
 import sys
+from datetime import date
 from pathlib import Path
 
 import yaml
@@ -24,6 +25,15 @@ MOIS_FR = {
     5: "Mai", 6: "Juin", 7: "Juillet", 8: "Août",
     9: "Septembre", 10: "Octobre", 11: "Novembre", 12: "Décembre",
 }
+
+# Pages du site, dans l'ordre de la nav. La nav elle-même est générée une seule
+# fois dans base.html.j2 à partir de cette liste (pas de duplication par page).
+PAGES = [
+    {"id": "accueil", "template": "accueil.html.j2", "fichier": "index.html", "libelle": "Accueil"},
+    {"id": "parcours", "template": "parcours.html.j2", "fichier": "parcours.html", "libelle": "Parcours"},
+    {"id": "competences", "template": "competences.html.j2", "fichier": "competences.html", "libelle": "Compétences"},
+    {"id": "projets", "template": "projets.html.j2", "fichier": "projets.html", "libelle": "Projets"},
+]
 
 
 def charger_cv(chemin: Path) -> dict:
@@ -103,10 +113,14 @@ def rendre_templates(contexte: dict) -> None:
 
     DIST_DIR.mkdir(exist_ok=True)
 
-    # Web : index.html + copie de la feuille de style à côté (chemin relatif simple pour GitHub Pages)
-    html_web = env.get_template("web.html.j2").render(**contexte)
-    (DIST_DIR / "index.html").write_text(html_web, encoding="utf-8")
+    # Web : une page par entrée de PAGES, toutes héritent de base.html.j2 (nav commune).
+    for page in PAGES:
+        html = env.get_template(page["template"]).render(
+            page_actuelle=page["id"], pages=PAGES, annee=date.today().year, **contexte
+        )
+        (DIST_DIR / page["fichier"]).write_text(html, encoding="utf-8")
     shutil.copyfile(STATIC_DIR / "style.css", DIST_DIR / "style.css")
+    shutil.copyfile(STATIC_DIR / "script.js", DIST_DIR / "script.js")
 
     # PDF : le CSS d'impression est injecté inline pour que le rendu ne dépende d'aucune
     # résolution de chemin file:// (Playwright charge le HTML via set_content, sans base URL).
@@ -132,7 +146,7 @@ def main() -> None:
         print(f"Erreur : {exc}", file=sys.stderr)
         sys.exit(1)
 
-    print("Génération terminée : dist/index.html, dist/cv.pdf, README.md")
+    print("Génération terminée : dist/ (site 4 pages), dist/cv.pdf, README.md")
 
 
 if __name__ == "__main__":
