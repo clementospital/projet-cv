@@ -273,6 +273,26 @@ main#contenu {
   margin-bottom: 2rem;
 }
 
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.projet-contexte {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--fg-muted);
+  margin: 0.25rem 0 0;
+}
+
 section > h2 {
   font-family: var(--font-mono);
   font-size: 1rem;
@@ -335,6 +355,21 @@ section > h2 {
   margin-bottom: 0.3rem;
 }
 
+.code-body {
+  margin: 0;
+  padding: 1.1rem 1.4rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--fg);
+}
+
+.code-body code {
+  font-family: inherit;
+  white-space: pre;
+}
+
 .prompt-line {
   font-family: var(--font-mono);
   font-size: 0.85rem;
@@ -387,6 +422,45 @@ section > h2 {
   letter-spacing: 0.04em;
   color: var(--fg-muted);
   font-weight: 600;
+}
+
+/* ---------- Cartes projet (page Projets) ---------- */
+
+.projets-grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.projet-carte {
+  display: block;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.projet-carte:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.projet-carte h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.05rem;
+  color: var(--fg);
+}
+
+.projet-lien {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent);
 }
 
 /* ---------- Timeline (page Parcours) ---------- */

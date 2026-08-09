@@ -112,15 +112,28 @@ def rendre_templates(contexte: dict) -> None:
     )
 
     DIST_DIR.mkdir(exist_ok=True)
+    annee = date.today().year
 
     # Web : une page par entrée de PAGES, toutes héritent de base.html.j2 (nav commune).
     for page in PAGES:
         html = env.get_template(page["template"]).render(
-            page_actuelle=page["id"], pages=PAGES, annee=date.today().year, **contexte
+            page_actuelle=page["id"], pages=PAGES, annee=annee, base="", **contexte
         )
         (DIST_DIR / page["fichier"]).write_text(html, encoding="utf-8")
     shutil.copyfile(STATIC_DIR / "style.css", DIST_DIR / "style.css")
     shutil.copyfile(STATIC_DIR / "script.js", DIST_DIR / "script.js")
+
+    # Une page détail par projet, dans dist/projets/. `base="../"` corrige les liens
+    # relatifs (style.css, nav, cv.pdf...) hérités de base.html.j2 vu qu'on est un niveau
+    # plus bas — nécessaire pour que ça marche aussi une fois publié sous un sous-chemin
+    # GitHub Pages (ex. clementospital.github.io/projet-cv/).
+    projets_dir = DIST_DIR / "projets"
+    projets_dir.mkdir(exist_ok=True)
+    for projet in contexte.get("projets") or []:
+        html = env.get_template("projet.html.j2").render(
+            page_actuelle="projets", pages=PAGES, annee=annee, base="../", projet=projet, **contexte
+        )
+        (projets_dir / f"{projet['slug']}.html").write_text(html, encoding="utf-8")
 
     # PDF : le CSS d'impression est injecté inline pour que le rendu ne dépende d'aucune
     # résolution de chemin file:// (Playwright charge le HTML via set_content, sans base URL).
