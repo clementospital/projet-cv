@@ -1,0 +1,97 @@
+{% extends "base.html.j2" %}
+{% block titre %}{{ projet.nom }}{% endblock %}
+{% block contenu %}
+<section class="page-intro reveal">
+  <a class="back-link" href="{{ base }}projets.html">← Retour aux projets</a>
+  <p class="eyebrow">$ cd {{ projet.slug }}</p>
+  <h1>{{ projet.nom }}</h1>
+  {% if projet.contexte %}<p class="projet-contexte">{{ projet.contexte }}</p>{% endif %}
+</section>
+
+<section class="reveal window">
+  <div class="window-bar">
+    <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+    <span class="window-title">README.md</span>
+  </div>
+  <div class="window-body">
+    <p class="hero-pitch">{{ projet.description }}</p>
+
+    {% if projet.contribution %}
+    <p class="prompt-line"><span class="prompt">$</span> ma-contribution --details</p>
+    <p class="hero-pitch">{{ projet.contribution }}</p>
+    {% endif %}
+
+    {% if projet.technos %}
+    <ul class="chips">
+      {% for t in projet.technos %}<li>{{ t }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="{{ projet.url }}">Voir le dépôt sur GitHub →</a>
+    </div>
+  </div>
+</section>
+
+{% if projet.extraits %}
+<section class="reveal">
+  <h2>Extraits de code</h2>
+  {% for extrait in projet.extraits %}
+  <div class="window code-window">
+    <div class="window-bar">
+      <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+      <span class="window-title">{{ extrait.fichier }}</span>
+    </div>
+    <pre class="code-body"><code>{{ extrait.code.strip("\n") }}</code></pre>
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
+
+{% if projet.lancement %}
+<section class="reveal window">
+  <div class="window-bar">
+    <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+    <span class="window-title">démo — lancer en local</span>
+  </div>
+  <div class="window-body">
+    {% for commande in projet.lancement %}
+    <p class="prompt-line"><span class="prompt">$</span> {{ commande }}</p>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if projet.apprentissage or projet.points_forts or projet.points_amelioration %}
+<section class="reveal window">
+  <div class="window-bar">
+    <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+    <span class="window-title">retour-experience.md</span>
+  </div>
+  <div class="window-body">
+    {% if projet.apprentissage %}
+    <div class="groupe">
+      <h3>Ce que j'en ai retenu</h3>
+      <p>{{ projet.apprentissage }}</p>
+    </div>
+    {% endif %}
+    {% if projet.points_forts %}
+    <div class="groupe">
+      <h3>Points forts</h3>
+      <ul>
+        {% for point in projet.points_forts %}<li>{{ point }}</li>{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    {% if projet.points_amelioration %}
+    <div class="groupe">
+      <h3>Points à améliorer</h3>
+      <ul>
+        {% for point in projet.points_amelioration %}<li>{{ point }}</li>{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

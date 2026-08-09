@@ -2,10 +2,32 @@
 {% block titre %}Projets{% endblock %}
 {% block contenu %}
 <section class="page-intro reveal">
-  <p class="eyebrow">$ cd projets</p>
+  <p class="eyebrow">$ ls projets/</p>
   <h1>Projets</h1>
 </section>
 
+{% if projets %}
+<div class="projets-grille">
+  {% for projet in projets %}
+  <a class="projet-carte reveal" href="projets/{{ projet.slug }}.html">
+    <div class="window-bar">
+      <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+      <span class="window-title">{{ projet.slug }}</span>
+    </div>
+    <div class="window-body">
+      <h3>{{ projet.nom }}</h3>
+      {% if projet.contexte %}<p class="lieu">{{ projet.contexte }}</p>{% endif %}
+      {% if projet.technos %}
+      <ul class="chips">
+        {% for t in projet.technos %}<li>{{ t }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+      <span class="projet-lien">Voir le projet →</span>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
 <section class="reveal window">
   <div class="window-bar">
     <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
@@ -20,4 +42,5 @@
     {% endif %}
   </div>
 </section>
+{% endif %}
 {% endblock %}
