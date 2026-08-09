@@ -48,6 +48,11 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add dist/cv.pdf README.md
           git diff --staged --quiet || git commit -m "chore: régénère le CV [skip ci]"
+          # Le PDF n'est pas parfaitement reproductible d'un run à l'autre (métadonnées
+          # Chromium type CreationDate) : un commit peut arriver même sans changement de
+          # contenu visible. Le rebase évite un rejet "non-fast-forward" si un run
+          # précédent a déjà poussé pendant que celui-ci tournait.
+          git pull --rebase origin main
           git push
 
   deploy:
