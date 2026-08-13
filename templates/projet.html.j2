@@ -3,9 +3,11 @@
 {% block contenu %}
 <section class="page-intro reveal">
   <a class="back-link" href="{{ base }}projets.html">← Retour aux projets</a>
+  {% if projet.type %}
+  <span class="badge {% if projet.type == 'Projet personnel' %}badge-personnel{% else %}badge-scolaire{% endif %}">{{ projet.type }}</span>
+  {% endif %}
   <p class="eyebrow">$ cd {{ projet.slug }}</p>
   <h1>{{ projet.nom }}</h1>
-  {% if projet.contexte %}<p class="projet-contexte">{{ projet.contexte }}</p>{% endif %}
 </section>
 
 <section class="reveal window">
@@ -14,17 +16,34 @@
     <span class="window-title">README.md</span>
   </div>
   <div class="window-body">
-    <p class="hero-pitch">{{ projet.description }}</p>
+    {% if projet.objectif %}
+    <div class="groupe">
+      <h3>À quoi ça sert</h3>
+      <p>{{ projet.objectif }}</p>
+    </div>
+    {% endif %}
+
+    {% if projet.pourquoi %}
+    <div class="groupe">
+      <h3>Pourquoi ce projet</h3>
+      <p>{{ projet.pourquoi }}</p>
+    </div>
+    {% endif %}
 
     {% if projet.contribution %}
-    <p class="prompt-line"><span class="prompt">$</span> ma-contribution --details</p>
-    <p class="hero-pitch">{{ projet.contribution }}</p>
+    <div class="groupe">
+      <h3>Ma contribution</h3>
+      <p>{{ projet.contribution }}</p>
+    </div>
     {% endif %}
 
     {% if projet.technos %}
-    <ul class="chips">
-      {% for t in projet.technos %}<li>{{ t }}</li>{% endfor %}
-    </ul>
+    <div class="groupe">
+      <h3>Technologies</h3>
+      <ul class="chips">
+        {% for t in projet.technos %}<li>{{ t }}</li>{% endfor %}
+      </ul>
+    </div>
     {% endif %}
 
     <div class="cta-row">

@@ -72,19 +72,17 @@ competences:
 projets:
   - slug: "ocaml-project"
     nom: "Ocaml-Project — flot maximum (Ford-Fulkerson)"
-    resume: >
-      Implémentation en OCaml de l'algorithme de Ford-Fulkerson (flot
-      maximum), avec export et visualisation du graphe résultat.
-    description: >
-      Implémentation en OCaml de l'algorithme de Ford-Fulkerson pour le calcul
-      du flot maximum dans un graphe orienté valué. Le projet part d'un
-      squelette de cours (structure de graphe fournie, abstraite via une
-      signature .mli) et y ajoute la résolution complète : recherche de
-      chemin augmentant par parcours en profondeur, calcul de la capacité
-      résiduelle minimale sur ce chemin, mise à jour du graphe résiduel,
-      jusqu'à épuisement des chemins augmentants. Le résultat est exportable
-      au format DOT et visualisable en SVG via Graphviz.
-    contexte: "Projet en binôme, cours de programmation fonctionnelle (INSA Toulouse)"
+    type: "Projet scolaire"
+    objectif: >
+      Calcule le flot maximum dans un graphe orienté valué (algorithme de
+      Ford-Fulkerson) et exporte le résultat en image SVG via Graphviz.
+    pourquoi: >
+      Projet en binôme du cours de programmation fonctionnelle à l'INSA
+      Toulouse : il fallait implémenter l'algorithme complet au-dessus d'un
+      squelette fourni par les enseignants (structure de graphe abstraite via
+      une signature .mli), recherche de chemin augmentant par parcours en
+      profondeur jusqu'à épuisement des chemins, puis mise à jour du graphe
+      résiduel à chaque itération.
     contribution: >
       Implémentation de l'algorithme (recherche de chemin augmentant, mise à
       jour du graphe résiduel), des fonctions utilitaires sur les graphes, et
@@ -143,22 +141,29 @@ projets:
               match arc with
                 |None -> new_arc gr {src = id1 ; tgt = id2 ; lbl = n};
                 |Some x-> new_arc gr {x with lbl = x.lbl + n};
-    apprentissage: null
-    points_forts: []
-    points_amelioration: []
+    apprentissage: >
+      Manipuler un vrai style de programmation fonctionnelle (récursion
+      terminale, immutabilité, typage fort avec signatures .mli) sur un
+      problème algorithmique concret, plutôt que sur des exercices isolés.
+    points_forts:
+      - "Algorithme correct et testé (tests unitaires) sur un graphe fourni par les enseignants"
+      - "Export DOT/SVG pour visualiser directement le résultat"
+    points_amelioration:
+      - "Pas de gestion des graphes avec cycles négatifs ou cas limites hors périmètre du cours"
 
   - slug: "detecteur-images-ia"
     nom: "Détecteur d'images générées par IA"
-    resume: >
-      Détecteur d'images générées par IA (ResNet18 + analyse fréquentielle
-      FFT) ; conception et développement de l'interface Gradio.
-    description: >
-      Projet de recherche encadrée (PIR) autour de la détection d'images
-      générées par IA. Le modèle combine deux branches de réseau de neurones
-      fusionnées avant classification : une branche spatiale (ResNet18) qui
-      traite l'image RGB, et une branche fréquentielle (petit CNN) qui traite
-      le spectre de magnitude obtenu par FFT 2D de l'image en niveaux de gris.
-    contexte: "Projet de recherche encadrée (PIR), 4e année INSA Toulouse, filière IA — travail en équipe"
+    type: "Projet scolaire"
+    objectif: >
+      Détecte si une image a été générée par IA, en combinant une analyse de
+      l'image brute (ResNet18) et une analyse fréquentielle (spectre FFT),
+      via une interface Gradio pour tester une image et voir le taux de
+      confiance de la prédiction.
+    pourquoi: >
+      Projet de recherche encadrée (PIR) en 4e année à l'INSA Toulouse,
+      filière IA, réalisé en équipe : vérifier si combiner information
+      spatiale et fréquentielle améliore la détection d'images générées par
+      IA par rapport à une approche purement spatiale.
     contribution: >
       Conception et développement de l'interface Gradio du projet : chargement
       d'une image, appel du modèle, affichage de la prédiction et du taux de
@@ -226,9 +231,65 @@ projets:
               tensor = torch.from_numpy(mag).unsqueeze(0)               # [1, H, W]
               tensor = transforms.Normalize(mean=[MEAN_FREQ], std=[STD_FREQ])(tensor)
               return tensor
-    apprentissage: null
-    points_forts: []
-    points_amelioration: []
+    apprentissage: >
+      Concevoir une interface simple (Gradio) pour rendre un modèle de deep
+      learning testable par quelqu'un qui ne lit pas de code, et travailler en
+      équipe sur un même dépôt (revues de code, découpage du travail).
+    points_forts:
+      - "Interface claire et immédiate : dépôt d'une image, prédiction et taux de confiance affichés"
+      - "Fusion de deux sources d'information (spatiale et fréquentielle) plutôt qu'un seul modèle"
+    points_amelioration:
+      - "Pas d'évaluation quantitative publiée (précision/rappel) sur un jeu de test indépendant"
+
+  - slug: "projet-cv"
+    nom: "Générateur de CV & site personnel"
+    type: "Projet personnel"
+    objectif: >
+      Pipeline qui transforme un unique fichier de données (cv.yaml) en trois
+      sorties toujours synchronisées : un PDF compatible ATS, un site web
+      personnel multi-pages, et le README du dépôt — le tout généré et
+      déployé automatiquement à chaque modification.
+    pourquoi: >
+      Après avoir dû mettre à jour mon CV séparément à plusieurs endroits
+      (PDF, LinkedIn, site perso) à chaque changement, avec le risque d'en
+      oublier un, j'ai construit ce générateur pour n'avoir plus qu'une seule
+      source de vérité à maintenir. Développé avec Claude Code, c'est aussi ce
+      site que vous êtes en train de consulter.
+    contribution: null
+    technos: ["Python", "Jinja2", "Playwright", "GitHub Actions", "HTML/CSS/JS vanilla"]
+    url: "https://github.com/clementospital/projet-cv"
+    lancement:
+      - "pip install -r requirements.txt"
+      - "playwright install chromium"
+      - "python src/build.py"
+    extraits:
+      - fichier: "src/build.py"
+        langage: "python"
+        code: |
+          # Web : une page par entrée de PAGES, toutes héritent de base.html.j2 (nav commune).
+          for page in PAGES:
+              html = env.get_template(page["template"]).render(
+                  page_actuelle=page["id"], pages=PAGES, annee=annee, base="", **contexte
+              )
+              (DIST_DIR / page["fichier"]).write_text(html, encoding="utf-8")
+
+          # PDF : le CSS d'impression est injecté inline pour que le rendu ne dépende d'aucune
+          # résolution de chemin file:// (Playwright charge le HTML via set_content, sans base URL).
+          print_css = (STATIC_DIR / "print.css").read_text(encoding="utf-8")
+          html_pdf = env.get_template("pdf.html.j2").render(print_css=print_css, **contexte)
+          generer_pdf(html_pdf, DIST_DIR / "cv.pdf")
+    apprentissage: >
+      Séparer proprement données et présentation (une seule source cv.yaml,
+      trois moteurs de rendu Jinja2) et industrialiser un pipeline avec de la
+      CI/CD réelle : build, déploiement GitHub Pages et commit automatique des
+      artefacts générés (PDF, README) à chaque push.
+    points_forts:
+      - "Une seule source de vérité (cv.yaml) pour 3 formats de sortie toujours synchronisés"
+      - "Déploiement entièrement automatisé (push → build → Pages) via GitHub Actions"
+      - "Zéro dépendance front : pas de framework, pas de CDN, pas de police externe"
+    points_amelioration:
+      - "Pas encore de tests automatisés (la validation YAML au démarrage sert de garde-fou)"
+      - "Page Projets pas encore pensée pour un grand nombre de projets (tri/filtre à ajouter si la liste grandit)"
 
 certifications:
   - nom: "Sensibilisation à la Propriété Industrielle"

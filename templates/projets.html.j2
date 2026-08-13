@@ -15,8 +15,11 @@
       <span class="window-title">{{ projet.slug }}</span>
     </div>
     <div class="window-body">
+      {% if projet.type %}
+      <span class="badge {% if projet.type == 'Projet personnel' %}badge-personnel{% else %}badge-scolaire{% endif %}">{{ projet.type }}</span>
+      {% endif %}
       <h3>{{ projet.nom }}</h3>
-      {% if projet.contexte %}<p class="lieu">{{ projet.contexte }}</p>{% endif %}
+      {% if projet.objectif %}<p class="projet-resume">{{ projet.objectif }}</p>{% endif %}
       {% if projet.technos %}
       <ul class="chips">
         {% for t in projet.technos %}<li>{{ t }}</li>{% endfor %}

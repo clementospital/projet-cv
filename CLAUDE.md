@@ -34,6 +34,17 @@ Une section = 1 clé dans `cv.yaml` + rendu à ajouter dans **4 endroits** :
 `templates/readme.md.j2`, et si la section a des dates, ajouter le formatage
 dans `preparer_contexte()` de `src/build.py`.
 
+## Schéma d'un projet (`cv.yaml` → `projets:`)
+
+Chaque projet suit un format volontairement intuitif, affiché comme une fiche
+structurée sur `templates/projet.html.j2` : `nom`, `type` (`"Projet scolaire"`
+ou `"Projet personnel"`, pilote le badge coloré), `objectif` (à quoi ça sert),
+`pourquoi` (pourquoi ce projet — contexte du cours, ou problème résolu si
+personnel), `technos`, `url` (lien vers le dépôt GitHub). Champs optionnels
+pour enrichir la page détail : `contribution`, `lancement`, `extraits`,
+`apprentissage`, `points_forts`, `points_amelioration`. Respecter ce même
+format pour tout nouveau projet ajouté.
+
 ## Stack & commandes
 
 - Python 3.11+, PyYAML, Jinja2, Playwright (Chromium headless pour le PDF).

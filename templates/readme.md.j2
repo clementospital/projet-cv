@@ -43,9 +43,12 @@
 {% if projets %}
 ## Projets
 {% for projet in projets %}
-### {% if projet.url %}[{{ projet.nom }}]({{ projet.url }}){% else %}{{ projet.nom }}{% endif %}
-{% if projet.description %}
-{{ projet.description }}
+### {% if projet.url %}[{{ projet.nom }}]({{ projet.url }}){% else %}{{ projet.nom }}{% endif %}{% if projet.type %} — {{ projet.type }}{% endif %}
+{% if projet.objectif %}
+{{ projet.objectif }}
+{% endif %}
+{% if projet.pourquoi %}
+**Pourquoi ce projet :** {{ projet.pourquoi }}
 {% endif %}
 {% if projet.technos %}
 {{ projet.technos | join(", ") }}

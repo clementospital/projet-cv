@@ -75,8 +75,9 @@
     <h2>Projets</h2>
     {% for projet in projets %}
     <article class="entree">
-      <h3>{{ projet.nom }}{% if projet.url %} — {{ projet.url }}{% endif %}</h3>
-      {% if projet.resume or projet.description %}<p>{{ projet.resume or projet.description }}</p>{% endif %}
+      <h3>{{ projet.nom }}</h3>
+      {% if projet.url %}<p class="groupe">{{ projet.url }}</p>{% endif %}
+      {% if projet.objectif %}<p>{{ projet.objectif }}</p>{% endif %}
       {% if projet.technos %}<p class="groupe">{{ projet.technos | join(", ") }}</p>{% endif %}
     </article>
     {% endfor %}

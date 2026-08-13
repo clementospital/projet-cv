@@ -54,17 +54,29 @@ clement.ospital64@gmail.com · +33 07 83 62 68 63 · Toulouse, France
 
 ## Projets
 
-### [Ocaml-Project — flot maximum (Ford-Fulkerson)](https://github.com/clementospital/Ocaml-Project)
+### [Ocaml-Project — flot maximum (Ford-Fulkerson)](https://github.com/clementospital/Ocaml-Project) — Projet scolaire
 
-Implémentation en OCaml de l'algorithme de Ford-Fulkerson pour le calcul du flot maximum dans un graphe orienté valué. Le projet part d'un squelette de cours (structure de graphe fournie, abstraite via une signature .mli) et y ajoute la résolution complète : recherche de chemin augmentant par parcours en profondeur, calcul de la capacité résiduelle minimale sur ce chemin, mise à jour du graphe résiduel, jusqu'à épuisement des chemins augmentants. Le résultat est exportable au format DOT et visualisable en SVG via Graphviz.
+Calcule le flot maximum dans un graphe orienté valué (algorithme de Ford-Fulkerson) et exporte le résultat en image SVG via Graphviz.
+
+**Pourquoi ce projet :** Projet en binôme du cours de programmation fonctionnelle à l'INSA Toulouse : il fallait implémenter l'algorithme complet au-dessus d'un squelette fourni par les enseignants (structure de graphe abstraite via une signature .mli), recherche de chemin augmentant par parcours en profondeur jusqu'à épuisement des chemins, puis mise à jour du graphe résiduel à chaque itération.
 
 OCaml, Dune, Graphviz
 
-### [Détecteur d'images générées par IA](https://github.com/vivienbn/pir_4a_ia)
+### [Détecteur d'images générées par IA](https://github.com/vivienbn/pir_4a_ia) — Projet scolaire
 
-Projet de recherche encadrée (PIR) autour de la détection d'images générées par IA. Le modèle combine deux branches de réseau de neurones fusionnées avant classification : une branche spatiale (ResNet18) qui traite l'image RGB, et une branche fréquentielle (petit CNN) qui traite le spectre de magnitude obtenu par FFT 2D de l'image en niveaux de gris.
+Détecte si une image a été générée par IA, en combinant une analyse de l'image brute (ResNet18) et une analyse fréquentielle (spectre FFT), via une interface Gradio pour tester une image et voir le taux de confiance de la prédiction.
+
+**Pourquoi ce projet :** Projet de recherche encadrée (PIR) en 4e année à l'INSA Toulouse, filière IA, réalisé en équipe : vérifier si combiner information spatiale et fréquentielle améliore la détection d'images générées par IA par rapport à une approche purement spatiale.
 
 Python, PyTorch, Gradio, NumPy
+
+### [Générateur de CV & site personnel](https://github.com/clementospital/projet-cv) — Projet personnel
+
+Pipeline qui transforme un unique fichier de données (cv.yaml) en trois sorties toujours synchronisées : un PDF compatible ATS, un site web personnel multi-pages, et le README du dépôt — le tout généré et déployé automatiquement à chaque modification.
+
+**Pourquoi ce projet :** Après avoir dû mettre à jour mon CV séparément à plusieurs endroits (PDF, LinkedIn, site perso) à chaque changement, avec le risque d'en oublier un, j'ai construit ce générateur pour n'avoir plus qu'une seule source de vérité à maintenir. Développé avec Claude Code, c'est aussi ce site que vous êtes en train de consulter.
+
+Python, Jinja2, Playwright, GitHub Actions, HTML/CSS/JS vanilla
 
 ## Langues
 

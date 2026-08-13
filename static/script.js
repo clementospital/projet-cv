@@ -19,12 +19,28 @@ if (navToggle && nav) {
       navToggle.setAttribute("aria-expanded", "false");
     });
   });
+
+  // Échap referme le menu mobile et rend la main au bouton qui l'a ouvert.
+  document.addEventListener("keydown", (evenement) => {
+    if (evenement.key === "Escape" && nav.classList.contains("nav-ouverte")) {
+      nav.classList.remove("nav-ouverte");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.focus();
+    }
+  });
 }
 
 // --- Bascule de thème (persistée) ---
 const themeToggle = document.getElementById("theme-toggle");
 
+function synchroniserIconeTheme() {
+  const clair = document.documentElement.dataset.theme === "light";
+  themeToggle.textContent = clair ? "☀️" : "🌙";
+  themeToggle.setAttribute("aria-pressed", String(clair));
+}
+
 if (themeToggle) {
+  synchroniserIconeTheme();
   themeToggle.addEventListener("click", () => {
     const clair = document.documentElement.dataset.theme === "light";
     if (clair) {
@@ -34,6 +50,7 @@ if (themeToggle) {
       document.documentElement.dataset.theme = "light";
       localStorage.setItem("theme", "light");
     }
+    synchroniserIconeTheme();
   });
 }
 
@@ -76,5 +93,17 @@ if (copyEmail) {
       copyEmail.textContent = texteInitial;
       copyEmail.classList.remove("copie");
     }, 1500);
+  });
+}
+
+// --- Retour en haut de page ---
+const backToTop = document.getElementById("back-to-top");
+
+if (backToTop) {
+  window.addEventListener("scroll", () => {
+    backToTop.classList.toggle("visible", window.scrollY > 480);
+  });
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
