@@ -1,6 +1,6 @@
 @page {
   size: A4;
-  margin: 12mm 16mm;
+  margin: 10mm 16mm;
 }
 
 * {
@@ -11,12 +11,12 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 10pt;
-  line-height: 1.25;
+  line-height: 1.2;
   color: #000000;
 }
 
 header {
-  margin-bottom: 8pt;
+  margin-bottom: 6pt;
 }
 
 header h1 {
@@ -37,7 +37,7 @@ header .contact {
 }
 
 section {
-  margin-bottom: 7pt;
+  margin-bottom: 5pt;
 }
 
 h2 {
@@ -45,13 +45,13 @@ h2 {
   text-transform: uppercase;
   letter-spacing: 0.03em;
   border-bottom: 0.75pt solid #000000;
-  padding-bottom: 2pt;
-  margin: 0 0 5pt;
+  padding-bottom: 1.5pt;
+  margin: 0 0 4pt;
 }
 
 /* Empêche qu'une expérience/formation soit coupée au milieu par un saut de page. */
 .entree {
-  margin-bottom: 5pt;
+  margin-bottom: 4pt;
   page-break-inside: avoid;
 }
 

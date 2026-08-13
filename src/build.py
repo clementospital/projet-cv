@@ -88,6 +88,8 @@ def preparer_contexte(donnees: dict) -> dict:
     for form in contexte.get("formations") or []:
         form["date_debut_affichage"] = formater_date(form.get("date_debut"))
         form["date_fin_affichage"] = formater_date(form.get("date_fin"))
+    for cert in contexte.get("certifications") or []:
+        cert["date_obtention_affichage"] = formater_date(cert.get("date_obtention"))
     return contexte
 
 

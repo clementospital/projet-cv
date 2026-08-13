@@ -25,6 +25,20 @@
 </section>
 {% endif %}
 
+{% if certifications %}
+<section class="reveal window">
+  <div class="window-bar">
+    <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+    <span class="window-title">certifications.txt</span>
+  </div>
+  <div class="window-body">
+    <ul class="chips">
+      {% for c in certifications %}<li>{{ c.nom }}{% if c.organisme %} — {{ c.organisme }}{% endif %}{% if c.date_obtention_affichage %} ({{ c.date_obtention_affichage }}){% endif %}</li>{% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
 {% if langues %}
 <section class="reveal window">
   <div class="window-bar">

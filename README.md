@@ -46,6 +46,12 @@ clement.ospital64@gmail.com · +33 07 83 62 68 63 · Toulouse, France
 
 - **Savoir-être** : Esprit d'initiative et capacité à apprendre rapidement de nouvelles technologies, Solides compétences en résolution de problèmes et optimisation d'algorithmes, Esprit d'équipe et capacité à communiquer des concepts techniques à des publics variés
 
+## Certifications
+
+- **Sensibilisation à la Propriété Industrielle** — INPI (Juin 2024)
+
+- **Claude Code** — Anthropic Academy (Août 2026)
+
 ## Projets
 
 ### [Ocaml-Project — flot maximum (Ford-Fulkerson)](https://github.com/clementospital/Ocaml-Project)

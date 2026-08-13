@@ -230,6 +230,14 @@ projets:
     points_forts: []
     points_amelioration: []
 
+certifications:
+  - nom: "Sensibilisation à la Propriété Industrielle"
+    organisme: "INPI"
+    date_obtention: "2024-06"
+  - nom: "Claude Code"
+    organisme: "Anthropic Academy"
+    date_obtention: "2026-08"
+
 langues:
   - langue: "Français"
     niveau: "Langue maternelle"

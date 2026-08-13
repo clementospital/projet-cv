@@ -34,6 +34,12 @@
 - **{{ groupe.categorie }}** : {{ groupe['items'] | join(", ") }}
 {% endfor %}
 {% endif %}
+{% if certifications %}
+## Certifications
+{% for c in certifications %}
+- **{{ c.nom }}**{% if c.organisme %} — {{ c.organisme }}{% endif %}{% if c.date_obtention_affichage %} ({{ c.date_obtention_affichage }}){% endif %}
+{% endfor %}
+{% endif %}
 {% if projets %}
 ## Projets
 {% for projet in projets %}
